@@ -1,24 +1,34 @@
 import './App.css';
 
-import viteLogo from '/vite.svg';
-import { useState } from 'react';
+import React from 'react';
+import { BrowserRouter, Link, Route, Routes } from 'react-router-dom';
 
-import reactLogo from './assets/react.svg';
+import TextGenerator from './pages/TextGenerator';
 
 function App() {
-  const [count, setCount] = useState(0)
 
   return (
-    <div className="App">
-     
-      <h1>Vite + React</h1>
-      <div className="card">
-        <button onClick={() => setCount((count) => count + 1)}>
-          count is {count}
-        </button>
-        </div>
-    </div>
-  )
+    <React.Fragment>
+      <BrowserRouter>
+        <header className='bg-pink-600'>
+          <h1>tOOl OF FUN</h1>
+          <nav>
+            <ul>
+              <li>Home</li>
+              <Link to={'text-generator'}>Text Generator</Link>
+            </ul>
+          </nav>
+        </header>
+        <main>
+          <Routes>
+            <Route path='text-generator' element={<TextGenerator/>}/>
+          </Routes>
+        </main>
+
+
+      </BrowserRouter>
+    </React.Fragment>
+  );
 }
 
-export default App
+export default App;
