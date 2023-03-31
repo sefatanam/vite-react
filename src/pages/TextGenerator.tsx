@@ -8,7 +8,11 @@ const TextGenerator = () => {
   const [repeatTimes, setRepeatTimes] = useState("0");
   const [generatedText, setGeneratedText] = useState("");
 
+  const TEN_THOUSAND = 10000;
   const onGenerateText = () => {
+    if (parseInt(repeatTimes) > TEN_THOUSAND) {
+      return toast.warn(`Repeated times maximum limited up to ${TEN_THOUSAND}`);
+    }
     const repeatedTimesInputText = `${inputText} `.repeat(
       parseInt(repeatTimes)
     );
@@ -36,23 +40,48 @@ const TextGenerator = () => {
   return (
     <div className="grid gap-4">
       <form className="grid gap-4">
-        <label className="text-pink-600 text-lg text-center">
-          Enter your text{" "}
-        </label>
-        <textarea
-          rows={4}
-          placeholder={"Type here..."}
-          value={inputText}
-          onChange={(e) => setInputText(e.target.value)}
-          className="border-none outline-none ring-2 ring-pink-600 focus:outline-blue-600 focus:ring-0"
-        />
-        <input
-          placeholder="How many times..."
-          type="number"
-          value={repeatTimes}
-          onChange={(e) => setRepeatTimes(e.target.value)}
-          className="border-none ring-2 ring-pink-600 focus:outline-blue-600 focus:ring-0 p-2"
-        />
+        <div className="sm:col-span-4">
+          <label
+            htmlFor="Repeat Times"
+            className="block text-sm font-medium leading-6 text-gray-900"
+          >
+            Repeat Times { parseInt(repeatTimes) > TEN_THOUSAND && <span className='text-red-600'>(Maximum limit upto {TEN_THOUSAND})</span>}
+          </label>
+          <div className="mt-2">
+            <div className="flex rounded-md shadow-sm ring-1 ring-inset ring-gray-300 focus-within:ring-2 focus-within:ring-inset focus-within:ring-indigo-600 sm:max-w-md">
+              <input
+                type="number"
+                value={repeatTimes}
+                onChange={(e) => setRepeatTimes(e.target.value)}
+                name="Repeat Times"
+                id="Repeat Times"
+                className="block flex-1 border-0 bg-transparent py-1.5 pl-1 text-gray-900 placeholder:text-gray-400 focus:ring-0 sm:text-sm sm:leading-6"
+                placeholder="max limit up to 10,000"
+              />
+            </div>
+          </div>
+        </div>
+        <div className="sm:col-span-4">
+          <label
+            htmlFor="Repeat Times"
+            className="block text-sm font-medium leading-6 text-gray-900"
+          >
+            Enter Your text
+          </label>
+          <div className="mt-2">
+            <div className="flex rounded-md shadow-sm ring-1 ring-inset ring-gray-300 focus-within:ring-2 focus-within:ring-inset focus-within:ring-indigo-600 sm:max-w-md">
+              <textarea
+                name="RepeatTimes"
+                id="RepeatTimes"
+                rows={4}
+                value={inputText}
+                onChange={(e) => setInputText(e.target.value)}
+                className="block flex-1 border-0 bg-transparent py-1.5 pl-1 text-gray-900 placeholder:text-gray-400 focus:ring-0 sm:text-sm sm:leading-6"
+                placeholder="max limit up to 10,000"
+              ></textarea>
+            </div>
+          </div>
+        </div>
         <button
           className="bg-pink-600 text-white p-2"
           type="button"
@@ -72,7 +101,6 @@ const TextGenerator = () => {
 
       <div
         onClick={scrollToTop}
-     
         title="Scroll to top button"
         className="fixed bottom-4 right-4 bg-pink-600 rounded-full"
       >
@@ -94,7 +122,7 @@ const TextGenerator = () => {
 
       <ToastContainer
         position="top-right"
-        autoClose={600}
+        autoClose={1000}
         hideProgressBar
         newestOnTop
         closeOnClick
