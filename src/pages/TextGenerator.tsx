@@ -20,7 +20,7 @@ const TextGenerator = () => {
   return (
     <div className="grid gap-4">
       <form className="grid gap-4">
-        <div className="sm:col-span-4">
+        <div className='grid'>
           <label
             htmlFor="Repeat Times"
             className="block text-sm font-medium leading-6 text-gray-900"
@@ -32,21 +32,21 @@ const TextGenerator = () => {
               </span>
             )}
           </label>
-          <div className="mt-2">
-            <div className="flex rounded-md shadow-sm ring-1 ring-inset ring-gray-300 focus-within:ring-2 focus-within:ring-inset focus-within:ring-indigo-600 sm:max-w-md">
+          <div className="mt-2 min-w-max">
+            <div className="flex rounded-md shadow-sm ring-1 ring-inset ring-gray-300 focus-within:ring-2 focus-within:ring-inset focus-within:ring-indigo-600 ">
               <input
                 type="number"
                 value={repeatTimes}
                 onChange={(e) => setRepeatTimes(e.target.value)}
                 name="Repeat Times"
                 id="Repeat Times"
-                className="block flex-1 border-0 bg-transparent py-1.5 pl-1 text-gray-900 placeholder:text-gray-400 focus:ring-0 sm:text-sm sm:leading-6"
+                className="block w-full flex-1 border-0 bg-transparent py-1.5 pl-1 text-gray-900 placeholder:text-gray-400 focus:ring-0 sm:text-sm sm:leading-6"
                 placeholder="max limit up to 10,000"
               />
             </div>
           </div>
         </div>
-        <div className="sm:col-span-4">
+        <div>
           <label
             htmlFor="Repeat Times"
             className="block text-sm font-medium leading-6 text-gray-900"
@@ -54,7 +54,7 @@ const TextGenerator = () => {
             Enter Your text
           </label>
           <div className="mt-2">
-            <div className="flex rounded-md shadow-sm ring-1 ring-inset ring-gray-300 focus-within:ring-2 focus-within:ring-inset focus-within:ring-indigo-600 sm:max-w-md">
+            <div className="flex rounded-md shadow-sm ring-1 ring-inset ring-gray-300 focus-within:ring-2 focus-within:ring-inset focus-within:ring-indigo-600">
               <textarea
                 name="RepeatTimes"
                 id="RepeatTimes"
