@@ -1,41 +1,21 @@
 import 'react-toastify/dist/ReactToastify.css';
 
-import { useEffect, useState } from 'react';
-import { toast, ToastContainer } from 'react-toastify';
+import { ToastContainer } from 'react-toastify';
+
+import useTextGenerator from '../hooks/TextGenerator.hook';
 
 const TextGenerator = () => {
-  const [inputText, setInputText] = useState("");
-  const [repeatTimes, setRepeatTimes] = useState("0");
-  const [generatedText, setGeneratedText] = useState("");
-
-  const TEN_THOUSAND = 10000;
-  const onGenerateText = () => {
-    if (parseInt(repeatTimes) > TEN_THOUSAND) {
-      return toast.warn(`Repeated times maximum limited up to ${TEN_THOUSAND}`);
-    }
-    const repeatedTimesInputText = `${inputText} `.repeat(
-      parseInt(repeatTimes)
-    );
-    setGeneratedText(repeatedTimesInputText);
-  };
-
-  const onCopyText = () => {
-    window.navigator.clipboard.writeText(generatedText);
-    toast.success("Text copied to your clipboard !");
-  };
-
-  const scrollToTop = () => {
-    window.scrollTo({
-      top: 0,
-      behavior: "smooth",
-    });
-  };
-
-  useEffect(() => {
-    if (generatedText.length > 0) {
-      setGeneratedText("");
-    }
-  }, [inputText, repeatTimes]);
+  const {
+    inputText,
+    setInputText,
+    repeatTimes,
+    setRepeatTimes,
+    generatedText,
+    onGenerateText,
+    onCopyText,
+    scrollToTop,
+    TEN_THOUSAND,
+  } = useTextGenerator();
 
   return (
     <div className="grid gap-4">
@@ -45,7 +25,12 @@ const TextGenerator = () => {
             htmlFor="Repeat Times"
             className="block text-sm font-medium leading-6 text-gray-900"
           >
-            Repeat Times { parseInt(repeatTimes) > TEN_THOUSAND && <span className='text-red-600'>(Maximum limit upto {TEN_THOUSAND})</span>}
+            Repeat Times{" "}
+            {parseInt(repeatTimes) > TEN_THOUSAND && (
+              <span className="text-red-600">
+                (Maximum limit upto {TEN_THOUSAND})
+              </span>
+            )}
           </label>
           <div className="mt-2">
             <div className="flex rounded-md shadow-sm ring-1 ring-inset ring-gray-300 focus-within:ring-2 focus-within:ring-inset focus-within:ring-indigo-600 sm:max-w-md">
@@ -77,7 +62,7 @@ const TextGenerator = () => {
                 value={inputText}
                 onChange={(e) => setInputText(e.target.value)}
                 className="block flex-1 border-0 bg-transparent py-1.5 pl-1 text-gray-900 placeholder:text-gray-400 focus:ring-0 sm:text-sm sm:leading-6"
-                placeholder="Type here..."
+                placeholder="max limit up to 10,000"
               ></textarea>
             </div>
           </div>
