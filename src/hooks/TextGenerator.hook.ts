@@ -18,18 +18,6 @@ const useTextGenerator = () => {
     setGeneratedText(repeatedTimesInputText);
   };
 
-  const onCopyText = () => {
-    window.navigator.clipboard.writeText(generatedText);
-    toast.success("Text copied to your clipboard !");
-  };
-
-  const scrollToTop = () => {
-    window.scrollTo({
-      top: 0,
-      behavior: "smooth",
-    });
-  };
-
   useEffect(() => {
     if (generatedText.length > 0) {
       setGeneratedText("");
@@ -43,8 +31,6 @@ const useTextGenerator = () => {
     setRepeatTimes,
     generatedText,
     onGenerateText,
-    onCopyText,
-    scrollToTop,
     TEN_THOUSAND,
   };
 };
